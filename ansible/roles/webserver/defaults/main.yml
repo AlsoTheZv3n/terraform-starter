@@ -1,0 +1,3 @@
+---
+# Override in group_vars or host_vars if needed.
+nginx_listen_port: 80

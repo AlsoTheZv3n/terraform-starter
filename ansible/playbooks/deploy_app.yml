@@ -1,0 +1,9 @@
+---
+- name: Deploy webserver role to web tier
+  # Dynamic-inventory groups look like: group_<project>_web
+  # e.g. group_platform_web, group_apps_web
+  hosts: group_*_web
+  become: true
+  gather_facts: true
+  roles:
+    - webserver

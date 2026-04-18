@@ -1,0 +1,17 @@
+tenant      = "tenant-a"
+project     = "platform"
+environment = "dev"
+owner       = "platform-team"
+
+clouds = {
+  aws   = true
+  azure = true
+  gcp   = false
+}
+
+aws_region         = "eu-central-1"
+aws_instance_count = 0
+
+azure_location       = "switzerlandnorth"
+azure_instance_count = 0
+azure_ssh_public_key = ""

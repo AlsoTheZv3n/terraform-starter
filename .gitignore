@@ -1,0 +1,84 @@
+# ----- Terraform -----
+**/.terraform/*
+.terraform.lock.hcl
+*.tfstate
+*.tfstate.*
+*.tfstate.backup
+*.tfplan
+tfplan
+crash.log
+crash.*.log
+
+# tfvars may contain secrets — only commit the .example files
+*.tfvars
+*.tfvars.json
+!*.tfvars.example
+
+# Override files (local-only Terraform overrides)
+override.tf
+override.tf.json
+*_override.tf
+*_override.tf.json
+
+# Terraform CLI configs
+.terraformrc
+terraform.rc
+
+# ----- Ansible -----
+ansible/collections/
+*.retry
+.ansible/
+ansible/inventory/*.local.yml
+ansible/inventory/host_vars/
+
+# ----- Secrets / keys -----
+*.pem
+*.key
+*.pfx
+*.p12
+*.jks
+*.keystore
+id_rsa
+id_rsa.*
+id_ed25519
+id_ed25519.*
+id_ecdsa
+id_ecdsa.*
+!*.pub
+
+# Cloud credential files
+.aws/credentials
+.azure/
+credentials.json
+service-account*.json
+gcp-key*.json
+!*.example.json
+
+# Env files
+.env
+.env.*
+!.env.example
+
+# ----- IDE / editors -----
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+.project
+.classpath
+
+# ----- OS -----
+.DS_Store
+Thumbs.db
+desktop.ini
+$RECYCLE.BIN/
+
+# ----- Misc -----
+*.log
+*.bak
+*.tmp
+node_modules/
+.venv/
+__pycache__/
+*.pyc

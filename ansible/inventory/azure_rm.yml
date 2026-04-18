@@ -1,0 +1,31 @@
+---
+# Dynamic inventory for Azure VMs.
+# Requires: azure.azcollection (and azure-mgmt-* python libs).
+# Auth via `az login` or AZURE_* env vars.
+
+plugin: azure.azcollection.azure_rm
+
+include_vm_resource_groups:
+  - "*"
+
+auth_source: auto
+
+keyed_groups:
+  - key: tags.Tenant
+    prefix: tenant
+    separator: "_"
+  - key: tags.Environment
+    prefix: env
+    separator: "_"
+  - key: tags.Project
+    prefix: project
+    separator: "_"
+  - key: tags.AnsibleGroup
+    prefix: group
+    separator: "_"
+
+hostvar_expressions:
+  ansible_host: public_ipv4_addresses[0] if public_ipv4_addresses else private_ipv4_addresses[0]
+
+conditional_groups:
+  managed_by_terraform: "tags.get('ManagedBy') == 'terraform'"

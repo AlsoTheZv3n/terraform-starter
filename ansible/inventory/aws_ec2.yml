@@ -1,0 +1,41 @@
+---
+# Dynamic inventory for EC2 instances provisioned by Terraform.
+# Instances are keyed by tags Terraform sets:
+#   Tenant, Environment, Project, AnsibleGroup.
+#
+# Usage:
+#   ansible-inventory -i inventory/aws_ec2.yml --graph
+#   ansible-playbook -i inventory/aws_ec2.yml playbooks/site.yml \
+#     --limit "tag_Tenant_tenant_a:&tag_Environment_dev"
+
+plugin: amazon.aws.aws_ec2
+
+regions:
+  - eu-central-1
+  - eu-west-1
+
+filters:
+  tag:ManagedBy: terraform
+  instance-state-name: running
+
+keyed_groups:
+  - key: tags.Tenant
+    prefix: tenant
+    separator: "_"
+  - key: tags.Environment
+    prefix: env
+    separator: "_"
+  - key: tags.Project
+    prefix: project
+    separator: "_"
+  - key: tags.AnsibleGroup
+    prefix: group
+    separator: "_"
+
+hostnames:
+  - tag:Name
+  - dns-name
+  - private-ip-address
+
+compose:
+  ansible_host: public_ip_address | default(private_ip_address)

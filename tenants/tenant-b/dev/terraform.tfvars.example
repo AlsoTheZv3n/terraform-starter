@@ -1,0 +1,17 @@
+tenant      = "tenant-b"
+project     = "apps"
+environment = "dev"
+owner       = "platform-team"
+
+clouds = {
+  aws   = false
+  azure = false
+  gcp   = true
+}
+
+gcp_project_id     = "tenant-b-dev"
+gcp_region         = "europe-west6"
+gcp_zone           = "europe-west6-a"
+gcp_location       = "EU"
+gcp_instance_count = 0
+gcp_ssh_public_key = ""

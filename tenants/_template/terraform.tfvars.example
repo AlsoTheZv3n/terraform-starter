@@ -1,0 +1,27 @@
+tenant      = "tenant-a"
+project     = "demo"
+environment = "dev"
+owner       = "platform-team"
+
+clouds = {
+  aws   = true
+  azure = true
+  gcp   = false
+}
+
+# AWS
+aws_region         = "eu-central-1"
+aws_instance_count = 0
+
+# Azure
+azure_location        = "switzerlandnorth"
+azure_subscription_id = "00000000-0000-0000-0000-000000000000"
+azure_instance_count  = 0
+azure_ssh_public_key  = "ssh-ed25519 AAAA... user@host"
+
+# GCP
+gcp_project_id     = "my-gcp-project"
+gcp_region         = "europe-west6"
+gcp_zone           = "europe-west6-a"
+gcp_instance_count = 0
+gcp_ssh_public_key = "ssh-ed25519 AAAA... user@host"

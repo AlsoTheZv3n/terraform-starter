@@ -1,0 +1,13 @@
+---
+# Master playbook. Run against all Terraform-managed hosts across clouds.
+#
+# Example:
+#   ansible-playbook -i inventory/aws_ec2.yml -i inventory/azure_rm.yml \
+#                    -i inventory/gcp_compute.yml playbooks/site.yml \
+#                    --limit "tenant_tenant_a:&env_prod"
+
+- name: Baseline every host
+  import_playbook: bootstrap.yml
+
+- name: Deploy application to web tier
+  import_playbook: deploy_app.yml

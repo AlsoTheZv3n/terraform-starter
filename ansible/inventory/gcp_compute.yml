@@ -1,0 +1,37 @@
+---
+# Dynamic inventory for GCE instances.
+# Requires: google.cloud collection + `pip install requests google-auth`.
+# Set GOOGLE_APPLICATION_CREDENTIALS or use `gcloud auth application-default login`.
+#
+# Set projects via env: export GCP_PROJECTS="tenant-a-dev tenant-b-dev"
+
+plugin: google.cloud.gcp_compute
+
+projects:
+  - tenant-a-dev
+  - tenant-b-dev
+
+auth_kind: application
+
+filters:
+  - "labels.managedby=terraform"
+
+keyed_groups:
+  - key: labels.tenant
+    prefix: tenant
+    separator: "_"
+  - key: labels.environment
+    prefix: env
+    separator: "_"
+  - key: labels.project
+    prefix: project
+    separator: "_"
+  - key: labels['ansible-group']
+    prefix: group
+    separator: "_"
+
+hostnames:
+  - name
+
+compose:
+  ansible_host: networkInterfaces[0].accessConfigs[0].natIP | default(networkInterfaces[0].networkIP)

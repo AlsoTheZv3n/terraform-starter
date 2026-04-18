@@ -1,0 +1,29 @@
+---
+- name: Install nginx
+  ansible.builtin.package:
+    name: nginx
+    state: present
+
+- name: Render landing page
+  ansible.builtin.copy:
+    dest: /var/www/html/index.html
+    owner: root
+    group: root
+    mode: '0644'
+    content: |
+      <!doctype html>
+      <html>
+        <head><title>{{ inventory_hostname }}</title></head>
+        <body>
+          <h1>{{ inventory_hostname }}</h1>
+          <p>Tenant: {{ tags.Tenant | default(labels.tenant | default('unknown')) }}</p>
+          <p>Environment: {{ tags.Environment | default(labels.environment | default('unknown')) }}</p>
+        </body>
+      </html>
+  notify: reload nginx
+
+- name: Ensure nginx is running
+  ansible.builtin.service:
+    name: nginx
+    state: started
+    enabled: true
